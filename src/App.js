@@ -67,13 +67,13 @@ function App() {
       </section>
 
       {/* Section 2 dengan latar belakang putih */}
-      <section style={{ backgroundColor: '#fff',color:'#000', padding: '50px 0', minHeight: '100vh' }}>
+      <section style={{ backgroundColor: '#BA704F',color:'#000', padding: '50px 0', minHeight: '100vh' }}>
         <h2>Section 2</h2>
         {/* Isi dari section 2 */}
       </section>
 
       {/* Section 3 dengan background hitam */}
-      <section style={{ backgroundColor: '#000', padding: '50px 0', minHeight: '100vh' }}>
+      <section style={{ backgroundColor: '#DFA878', padding: '50px 0', minHeight: '100vh' }}>
         <h2>Section 3</h2>
         {/* Isi dari section 2 */}
       </section>
