@@ -61,9 +61,11 @@ function App() {
       {/* Section 1 dengan background foto */}
       <section style={{ backgroundImage: `url(${background1})`, backgroundSize: 'cover', backgroundPosition: '50% 30%', height:'100vh' }}>
         <header className="App-header">
-          <h1>Welcome to My Blockchain Portfolio</h1>
-          <p>{portfolioName ? `Portfolio Name: ${portfolioName}` : 'Loading...'}</p>
         </header>
+        <marquee behavior="scroll" direction="right" scrollamount="15" style={{ position: 'absolute', bottom: '20px', width: '100%', color: '#fff', fontSize:'210px', fontFamily:'Raleway,sans-serif' }}>
+             {portfolioName ? `Portfolio Name: ${portfolioName}` : '- Muhammad Abid A Syakur -'}
+        </marquee>
+
       </section>
 
       {/* Section 2 dengan latar belakang putih */}
