@@ -1,15 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Link, Events, animateScroll as scroll } from 'react-scroll';
 import './App.css';
 import Web3 from 'web3';
 import PortfolioContract from './contracts/Portfolio.json';
 import Navbar from './Navbar'; // Import komponen Navbar
-import background1 from './background_cover.JPG'; // Background foto untuk section 1
+import ethereumLogo from './logo_load.png'; // Logo Ethereum
+import Home from './Home';
+import Work from './Work';
+import About from './About';
+import Contact from './Contact';
 
 function App() {
+  const sectionRef = useRef(null);
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
   const [portfolioName, setPortfolioName] = useState('');
-  const [projects, setProjects] = useState([]);
+  const [isLoading, setIsLoading] = useState(true); // State untuk loading
 
   useEffect(() => {
     async function loadWeb3() {
@@ -42,44 +49,30 @@ function App() {
       setPortfolioName(name);
     }
 
-    // async function loadProjects() {
-    //   // Load projects from your database or API
-    //   const projectsData = await fetch('https://example.com/projects');
-    //   const projectsJson = await projectsData.json();
-    //   setProjects(projectsJson);
-    // }
-
     loadWeb3();
     loadBlockchainData();
-    // loadProjects();
+
+    // Simulasi waktu loading dengan setTimeout
+    setTimeout(() => {
+      setIsLoading(false); // Setelah beberapa detik, loading selesai
+    }, 3000); // Ganti 3000 dengan durasi loading yang Anda inginkan (dalam milidetik)
   }, [web3]);
 
   return (
     <div className="App">
-      <Navbar /> {/* Tambahkan navbar di atas header */}
-
-      {/* Section 1 dengan background foto */}
-      <section style={{ backgroundImage: `url(${background1})`, backgroundSize: 'cover', backgroundPosition: '50% 30%', height:'100vh' }}>
-        <header className="App-header">
-        </header>
-        <marquee behavior="scroll" direction="right" scrollamount="15" style={{ position: 'absolute', bottom: '20px', width: '100%', color: '#fff', fontSize:'210px', fontFamily:'Raleway,sans-serif' }}>
-             {portfolioName ? `Portfolio Name: ${portfolioName}` : '- Muhammad Abid A Syakur -'}
-        </marquee>
-
-      </section>
-
-      {/* Section 2 dengan latar belakang putih */}
-      <section style={{ backgroundColor: '#BA704F',color:'#000', padding: '50px 0', minHeight: '100vh' }}>
-        <h2>Section 2</h2>
-        {/* Isi dari section 2 */}
-      </section>
-
-      {/* Section 3 dengan background hitam */}
-      <section style={{ backgroundColor: '#DFA878', padding: '50px 0', minHeight: '100vh' }}>
-        <h2>Section 3</h2>
-        {/* Isi dari section 2 */}
-      </section>
-
+      {isLoading ? ( // Tampilkan animasi loading jika isLoading true
+        <div className="loading">
+          <img src={ethereumLogo} alt="Ethereum Logo" className="ethereum-logo" />
+        </div>
+      ) : (
+        <>
+          <Navbar /> {/* Tambahkan navbar di atas header */}
+           <Home ref={sectionRef} portfolioName={portfolioName} />
+          <Work />
+          <About />
+          <Contact />
+        </>
+      )}
     </div>
   );
 }
