@@ -6,7 +6,7 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "gsap": "^3.12.5",
+    "gasp": "^0.0.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-parallax": "^3.5.1",
@@ -39,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gsap": "^3.12.5"
   }
 }

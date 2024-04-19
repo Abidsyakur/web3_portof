@@ -6,6 +6,7 @@ const Home = ({ portfolioName }) => {
   const section1Ref = useRef(null);
   const section2Ref = useRef(null);
   const section3Ref = useRef(null); // Add ref for scrolling
+  const textRef = useRef(null); // Add ref for the text element
 
   useEffect(() => {
     const options = {
@@ -14,12 +15,25 @@ const Home = ({ portfolioName }) => {
       easing: 'ease-in-out' // Adjust the easing function to your liking
     };
     section1Ref.current.scrollIntoView(options); // Scroll to section 1 when component is mounted
+
+    // Add event listener to window scroll event
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
-  
+
+  const handleScroll = () => {
+    const scrollPosition = window.scrollY;
+    const textElement = textRef.current;
+    const offset = scrollPosition * 0.5; // Adjust the offset value to your liking
+    textElement.style.transform = `translateX(-${offset}px)`;
+  };
+
   return (
     <section id='home' style={{ backgroundImage: `url(${background1})`, backgroundSize: 'cover', backgroundPosition: '50% 30%', height:'100vh' }}>
       <marquee behavior="scroll" direction="right" scrollamount="15" style={{ position: 'absolute', bottom: '20px', width: '100%', color: '#fff', fontSize:'210px', fontFamily:'Raleway,sans-serif' }}>
-        <span className="glowing-text">{portfolioName ? `Portfolio Name: ${portfolioName}` : '- Muhammad Abid A Syakur -'}</span>
+        <span ref={textRef} className="glowing-text">{portfolioName ? `Portfolio Name: ${portfolioName}` : '- Muhammad Abid A Syakur -'}</span>
       </marquee>
 
       {/* Section 1 */}
@@ -41,5 +55,6 @@ const Home = ({ portfolioName }) => {
     </section>
   );
 }
+
 
 export default Home;
